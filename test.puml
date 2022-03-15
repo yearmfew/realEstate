@@ -1,0 +1,59 @@
+@startuml "Test"
+
+class User <<Entity>> {
+    + name: String
+    + surname: String
+    + phoneNummer: Number
+    + mail: String
+}
+
+class Renter <<Entitiy>> {
+    + searchedHouseType: House
+    + applyForAppointment()
+    + applyToRentHouse()
+    + searchHouse()
+}
+
+class House <<Entitiy>> {
+    + type: String
+    + squaremeters: Number
+    + numberOfRooms: Number
+    + rent: Number
+    + extraCosts: Number
+    + floor: Number
+    + basement: Boolean
+    + isPetAllowed: Boolean
+    + garage: Boolean
+    + availableParkPlaceForHouse: Number
+    + numberOfBedrooms: Number
+    + numberOfBaths: Number
+    + numberOfRooms: Number 
+    + adresse: Adresse
+    + description: String
+
+}
+class Adresse {
+    + street: String
+    + apartmentNumber: String
+    + houseNumber: String
+    + postCode: String 
+}
+
+class Landlord <<Entitiy>> {
+    + bewertung: Number
+    + house: House
+    + createAnAdvert()
+    + acceptAppointment()
+    + acceptRenter()
+
+}
+
+Landlord -up-|> User
+Renter -up-|> User
+House -up-* Landlord
+Adresse -right-*House
+Adresse -up-*User
+
+
+@enduml
+
