@@ -1,17 +1,16 @@
 @startuml "Test"
 
-class User <<Entity>> {
-    + name: String
-    + surname: String
-    + phoneNummer: Number
-    + mail: String
-}
 
 class Renter <<Entitiy>> {
+    + name: String
+    + surname: String
+    + phoneNumber: String
+    + mail: String
+    + appointments: Appointment[]  
     + searchedHouseType: House
-    + applyForAppointment()
     + applyToRentHouse()
     + searchHouse()
+    + askForAppointment()
 }
 
 class House <<Entitiy>> {
@@ -28,11 +27,12 @@ class House <<Entitiy>> {
     + numberOfBedrooms: Number
     + numberOfBaths: Number
     + numberOfRooms: Number 
-    + adresse: Adresse
+    + adress: Adress
     + description: String
+    + landlord: Landlord
 
 }
-class Adresse {
+class Adress {
     + street: String
     + apartmentNumber: String
     + houseNumber: String
@@ -40,19 +40,32 @@ class Adresse {
 }
 
 class Landlord <<Entitiy>> {
+    + name: String
+    + surname: String
+    + phoneNummer: String
+    + mail: String
     + bewertung: Number
     + house: House
     + createAnAdvert()
-    + acceptAppointment()
     + acceptRenter()
+    
 
 }
+class Appointment{
+    + date: Date 
+    + adress: Adress
+    + renter: Renter
+    + landlord: Landlord
+    + accepted: Boolean
+    + acceptAppointment()
+    + cancelAppointment()
+}
 
-Landlord -up-|> User
-Renter -up-|> User
+
+
 House -up-* Landlord
-Adresse -right-*House
-Adresse -up-*User
+Adress -right-*House
+Adress -up-*User
 
 
 @enduml
